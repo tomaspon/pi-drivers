@@ -5,7 +5,7 @@ const { getNamesHand } = require("../handlers/getNamesHand");
 
 const router = Router();
 
-router.get("/drivers", getDriversHand);
+router.get("/", getDriversHand);
 router.get("/:id", getIdsHand);
 router.get("/name", getNamesHand);
 router.post("/drivers/:id");

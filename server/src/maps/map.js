@@ -4,8 +4,7 @@ const allDBDrivers = (drivers) => {
       if (driver) {
         let teams;
         if (typeof driver.id === "string") {
-          //comprueba que el id sea un string
-          teams = driver.teams?.split(",").map((team) => team.trim()) || []; //si el id es un string, separa los equipos por coma en un array
+          teams = driver.teams?.split(",").map((team) => team.trim()) || [];
         } else {
           teams = driver.teams || [];
         }
@@ -24,7 +23,7 @@ const allDBDrivers = (drivers) => {
         return null;
       }
     })
-    .filter((driver) => driver !== null); //elimina todos los elementos nulos de la lista de conductores, de modo que obtenemos una lista limpia de conductores válidos.
+    .filter((driver) => driver !== null);
 };
 
 module.exports = {
