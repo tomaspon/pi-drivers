@@ -1,65 +1,43 @@
 const { DataTypes } = require("sequelize");
-
 module.exports = (sequelize) => {
   sequelize.define(
     "Driver",
     {
       id: {
         type: DataTypes.UUID,
-        primaryKey: true,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
+        primaryKey: true,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "The name is required",
-          },
-        },
       },
-      lastName: {
+      lastname: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "The last name is required",
-          },
-        },
       },
       description: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "The description is required",
-          },
-        },
       },
       image: {
-        type: DataTypes.TEXT,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       nationality: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "The nationality is required",
-          },
-        },
       },
-      birthDate: {
-        type: DataTypes.DATE,
+      birthdate: {
+        type: DataTypes.DATEONLY,
         allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "The birth date is required",
-          },
-        },
+      },
+      createDb: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false,
       },
     },
-    { timestamps: false }
+    { timestamps: false, freezeTableName: true }
   );
 };
