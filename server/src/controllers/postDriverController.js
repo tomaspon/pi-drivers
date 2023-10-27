@@ -1,34 +1,71 @@
+
+// const axios = require("axios");
+// const { Driver, Teams } = require("../db");
+
+// const createDriver = async (name, lastName, description, image, teams, nationality, birthDate) => {
+//   const newDriver = await Driver.create({
+//         name,
+//         lastName,
+//         description,
+//         image,
+//         nationality,
+//         birthDate
+//     })
+
+//     teams.forEach(async (teams) => {
+//         let teamsDb=await Teams.findAll({
+//             where: {
+//                 name: teams
+//             },
+//           });
+//           await newDriver.addTeams(teamsDb); 
+//         });
+
+//     const team = await Teams.findAll({
+//         where: {
+//             name: teams
+//         }
+//     })
+
+//     await newDriver.addTeams(team);
+
+//     await newDriver.reload({
+//         include: {
+//             model: Teams,
+//             attributes: ["name"],
+//             through: {
+//                 attributes: []
+//             }
+//         }
+//     });
+// }
+
+// module.exports = {
+//     createDriver
+// }
+
 const { Driver, Teams } = require("../db");
 const Sequelize = require("sequelize");
 
 const createDriver = async (
   name,
-  lastname,
+  lastName,
   description,
   image,
   nationality,
-  birthdate,
+  birthDate,
   teams
 ) => {
   try {
     const newDriver = await Driver.create({
       name,
-      lastname,
+      lastName,
       description,
-      image,
       nationality,
-      birthdate,
+      image,
+      birthDate,
+      teams
     });
-
-    const addTeams = await Teams.findAll({
-      where: {
-        name: {
-          [Sequelize.Op.in]: teams,
-        },
-      },
-    });
-
-    await newDriver.addTeams(addTeams);
 
     const driverRelation = await Driver.findOne({
       where: {
@@ -47,7 +84,7 @@ const createDriver = async (
 
     return driverRelation;
   } catch (error) {
-    throw error;
+    throw Error(error.message)
   }
 };
 

@@ -1,36 +1,53 @@
-const axios = require("axios");
 const { Teams } = require("../db");
+const axios = require("axios");
+const URL = "http://localhost:5000/drivers";
 
-const allTeams = async () => {
-  try {
-    const response = await axios.get(`http://localhost:5000/drivers`);
-    const drivers = response.data;
+const cleanTeams = (drivers) => {
+  const uniqueTeams = new Set();
 
-    const uniqueTeamNames = new Set();
+  drivers.forEach((driver) => {
+    if (driver.teams) {
+      const teamsArray = driver.teams.split(",").map((team) => team.trim());
+      teamsArray.forEach((team) => {
+        if (team.length > 0) {
+          uniqueTeams.add(team);
+        }
+      });
+    }
+  });
 
-    drivers.forEach((driver) => {
-      if (driver.teams) {
-        let teams = driver.teams.split(/\s*,\s*/);
-
-        teams.forEach((teamName) => {
-          if (!uniqueTeamNames.has(teamName)) {
-            uniqueTeamNames.add(teamName);
-
-            Teams.findOrCreate({
-              where: {
-                name: teamName,
-              },
-            });
-          }
-        });
-      }
-    });
-
-    const allDataTeams = await Teams.findAll();
-    return allDataTeams;
-  } catch (error) {
-    throw error;
-  }
+  return [...uniqueTeams];
 };
 
-module.exports = {allTeams};
+const getAllTeams = async () => {
+  const response = await axios(URL);
+  const teams = cleanTeams(response.data);
+
+  const teamsInDB = await Teams.findAll();
+
+  if (teamsInDB.length === 0) {
+    // La base de datos está vacía, así que creamos los equipos
+    await Promise.all(
+      teams.map(async (team) => {
+        try {
+          const [newTeam, created] = await Teams.findOrCreate({
+            where: { name: team },
+            defaults: { name: team },
+          });
+
+          if (created) {
+            console.log(`Equipo creado: ${team}`);
+          } else {
+            console.log(`Equipo ya existente: ${team}`);
+          }
+        } catch (error) {
+          console.error(`Error al crear el equipo ${team}:`, error);
+        }
+      })
+    );
+  }
+
+  return teams;
+};
+
+module.exports = { getAllTeams };

@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastname: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -28,7 +28,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      birthdate: {
+      birthDate: {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },
@@ -38,6 +38,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     },
-    { timestamps: false, freezeTableName: true }
+    { timestamps: false }
   );
 };

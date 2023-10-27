@@ -1,11 +1,11 @@
 const axios = require("axios");
-const { Driver, Team } = require("../db");
+const { Driver, Teams } = require("../db");
 const { Op } = require("sequelize");
 
 const driverName = async (name) => {
   const lowercaseName = name.toLowerCase();
 
-  const dbDrivers = await Driver.findAll({
+  const DBDrivers = await Driver.findAll({
     where: {
       name: {
         [Op.iLike]: `%${lowercaseName}%`,
@@ -13,7 +13,7 @@ const driverName = async (name) => {
     },
     include: [
       {
-        model: Team,
+        model: Teams,
         attributes: ["name"],
         through: {
           attributes: [],
@@ -40,7 +40,7 @@ const driverName = async (name) => {
     teams: driver.teams,
   }));
 
-  const dbDataDrivers = dbDrivers.map((driver) => ({
+  const dbDataDrivers = DBDrivers.map((driver) => ({
     id: driver.id,
     name: driver.name,
     lastname: driver.lastname,
@@ -51,7 +51,7 @@ const driverName = async (name) => {
     teams: driver.Teams.map((team) => team.name),
   }));
 
-  if (!apiDrivers.length && !dbDrivers.length)
+  if (!apiDrivers.length && !DBDrivers.length)
     throw new Error("This driver does not exist.");
 
   return [...apiDataDrivers, ...dbDataDrivers].slice(0, 15);

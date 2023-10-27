@@ -1,7 +1,7 @@
 const {createDriver} = require("../controllers/postDriverController");
 
 const postNewDriver = async (req, res) => {
-  const { name, lastname, description, image, nationality, birthdate, teams } =
+  const { name, lastName, description, image, nationality, birthDate, teams } =
     req.body;
 
   if (!Array.isArray(teams) || teams.length === 0) {
@@ -14,11 +14,11 @@ const postNewDriver = async (req, res) => {
 
   if (
     !name ||
-    !lastname ||
+    !lastName ||
     !description ||
     !image ||
     !nationality ||
-    !birthdate
+    !birthDate
   ) {
     return res
       .status(400)
@@ -28,11 +28,11 @@ const postNewDriver = async (req, res) => {
   try {
     const newDriver = await createDriver(
       name,
-      lastname,
+      lastName,
       description,
       image,
       nationality,
-      birthdate,
+      birthDate,
       teams
     );
     res.status(201).json(newDriver);
