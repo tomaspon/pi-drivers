@@ -32,4 +32,15 @@ const driversIds = async (id) => {
   }
 };
 
-module.exports = {driversIds};
+const getDriverById = async (id) => {
+  const driver = await Driver?.findByPk(id, {
+    include: {
+      model: Teams,
+      attributes: ["name"],
+      through: { attributes: [] },
+    },
+  });
+  return driver;
+};
+
+module.exports = { driversIds, getDriverById };
