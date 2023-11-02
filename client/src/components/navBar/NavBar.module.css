@@ -1,0 +1,91 @@
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.logoFormula{
+    width: 160px;
+    display: flex;
+    position: relative;
+    top: 16px;
+    left: 15px;
+}
+
+
+.buttonStart{
+    position: absolute;
+    width: 136px;
+    background: none;
+    border-radius: 80px;
+    height: 30px;
+    color: white;         /* #EE0000 */
+    display: flex;
+    align-self: start;
+    margin-top: 12px;
+    margin-left: 0px;
+    border:2px solid transparent;
+    font-size: 18px;
+    font-weight: 400;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.buttonStart:hover{
+    font-size: 18.5px;
+    transition: 0.3s;
+}
+
+a{
+    text-decoration: none;
+}
+
+hr {
+position: relative;
+top: -10px;
+right: 720px;
+width: 20px;
+border: 0.5px solid #EE0000;
+transform: rotate(90deg);
+}
+
+.buttons{
+    background: none;
+    color: #EE0000;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    position: relative;
+    left: -500px;
+    margin-right: 40px;
+    top: -36px;
+}
+
+/* .buttons{
+    background: none;
+    color: #EE0000;
+    border: none;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    margin: 40px;
+    position: relative;
+    top: -59px;
+    left: -450px;
+} */
+
+
+.buttons:hover{
+    color: #9c0000;
+    transition: 0.3s;
+}
+
+.container{
+    height: 70px;
+    margin: 0 auto;
+    background-color: white;
+    display: block;
+}
+

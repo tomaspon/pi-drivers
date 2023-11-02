@@ -1,0 +1,47 @@
+.card {
+    background-color: white;
+    flex-wrap: wrap;
+    flex-direction: row;
+    position: relative;
+    top: 100px;
+    margin: 18px;
+    width: 280px;
+    height: 450px;
+    border: solid 1px red;
+    border-radius: 4px;
+    color: black;
+}
+
+.image {
+    margin-top: 20px;
+    margin: 0 auto;
+    margin-bottom: -12px;
+    width: 280px;
+    height: 320px;
+    position: relative;
+    justify-self: center;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+.teams {
+    text-align: start;
+    margin: 0 auto;
+    position: relative;
+    bottom:10px;
+    margin-left: 20px;
+    width: 240px;
+}
+
+
+h3 {
+    margin: 20px;
+    margin-left: 20px;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: start;
+}
+p{
+    font-size: 16px;
+    font-weight: 400;
+    }

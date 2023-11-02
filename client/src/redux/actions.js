@@ -1,38 +1,68 @@
-import { ADD_DRIV, REMOVE_DRIV, FILTER, ORDER } from "./action-types";
+import { GET_DRIVERS, GET_TEAMS, PAGE_UPDATES, PAGINATED } from './actions-types'
+import axios from 'axios'
 
-export const addDriv = (character) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.post(URL, character);
-      return dispatch({
-        type: ADD_DRIV,
-        payload: data,
-      });
-    } catch (error) {
-      throw Error(error.message);
+export function getDrivers() {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get('http://localhost:3001/drivers');
+        const drivers = response.data;
+        dispatch({
+          type: GET_DRIVERS,
+          payload: drivers,
+        });
+  
+        // Calcula y actualiza totalPages
+        const totalPages = Math.ceil(drivers.length / 9);
+        dispatch(updateTotalPages(totalPages));
+      } catch (error) {
+        alert(error.response.data.error);
+      }
+    };
+  }
+  
+  export function getTeams() {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get('http://localhost:3001/teams');
+        const teams = response.data;
+        dispatch({
+          type: GET_TEAMS,
+          payload: teams,
+        });
+      } catch (error) {
+        alert(error.response.data.error);
+      }
     }
-  };
-};
+  }
+  
+  export function postDriver(state) {
+    return async function (dispatch) {
+      try {
+        await axios.post('http://localhost:3001/drivers', state);
+        alert('Driver created successfully!');
 
-export const removeDriv = (id) => {
-  return async (dispatch) => {
-    try {
-      const { data } = await axios.delete(`${URL_BASE}${id}`);
-
-      return dispatch({
-        type: REMOVE_DRIV,
-        payload: data,
-      });
-    } catch (error) {
-      throw Error(error.message);
+      } catch (error) {
+        alert("Error creating driver: " + error.response.data.error);
     }
-  };
-};
-
-export const filterCards = (team) => {
-  return { type: FILTER, payload: team };
-};
-
-export const orderCards = (order) => {
-  return { type: ORDER, payload: order };
-};
+    }
+  }
+  
+  export function paginatedDrivers(order) {
+    return (dispatch) => {
+      try {
+        dispatch({
+          type: PAGINATED,
+          payload: order,
+        });
+      } catch (error) {
+        alert(error.response.data.error);
+      }
+    }
+  }
+  
+  export function updateTotalPages(totalPages) {
+    return {
+      type: PAGE_UPDATES,
+      payload: totalPages,
+    };
+  }
