@@ -1,12 +1,13 @@
-const {allDrivers} = require("../controllers/getAllDriversController");
+const {getDrivers}  = require("../controllers/getAllDriversController");
 
-const getDriversHand = async (req, res) => {
+const getAllDriversHand = async (req, res) => {
   try {
-    const drivers = await allDrivers();
-    res.status(200).json(drivers);
+      const {name, page} = req.query;
+      const response = await getDrivers(name, page);
+      res.status(200).json(response);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+      res.status(400).json({ error: error.message })
   }
 };
 
-module.exports = {getDriversHand};
+module.exports = {getAllDriversHand};

@@ -26,7 +26,6 @@ const getAllTeams = async () => {
   const teamsInDB = await Teams.findAll();
 
   if (teamsInDB.length === 0) {
-    // La base de datos está vacía, así que creamos los equipos
     await Promise.all(
       teams.map(async (team) => {
         try {

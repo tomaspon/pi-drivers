@@ -46,46 +46,41 @@
 
 const { Driver, Teams } = require("../db");
 const Sequelize = require("sequelize");
+const {getAllDrivers } = require("../helper/driversMap");
 
-const createDriver = async (
-  name,
-  lastName,
-  description,
-  image,
-  nationality,
-  birthDate,
-  teams
-) => {
-  try {
+const postDriver = async (name, lastName, description, image, teams, nationality, birthDate) => {
+    const formattedBirthDate = new Date(birthDate).toISOString().split('T')[0];
     const newDriver = await Driver.create({
-      name,
-      lastName,
-      description,
-      nationality,
-      image,
-      birthDate,
-      teams
+        name,
+        lastName,
+        description,
+        image,
+        nationality,
+        birthDate: formattedBirthDate
+    })
+
+    teams.forEach(async (teams) => {
+        let teamsDb=await Teams.findAll({
+            where: {
+                name: [teams]
+            },
+        });
+        
+        await newDriver.addTeams(teamsDb); 
     });
 
-    const driverRelation = await Driver.findOne({
-      where: {
-        id: newDriver.id,
-      },
-      include: [
-        {
-          model: Teams,
-          attributes: ["name"],
-          through: {
-            attributes: [],
-          },
-        },
-      ],
-    });
+    const team = await Teams.findAll({
+        where: {
+            name: teams
+        }
+    })
 
-    return driverRelation;
-  } catch (error) {
-    throw Error(error.message)
-  }
-};
+    await newDriver.addTeams(team);
 
-module.exports = {createDriver};
+   
+    return getAllDrivers(newDriver);
+}
+
+module.exports = {
+    postDriver
+}
