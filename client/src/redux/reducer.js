@@ -18,64 +18,52 @@ import {
   };
   
  export const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case GET_DRIVERS:
-        return {
-          ...state,
-          allDrivers: action.payload,
-        };
-      case GET_TEAMS:
-        return {
-          ...state,
-          allTeams: action.payload,
-        };
-
-      case GET_BYID:
-        return {
-          ...state,
-          driverId: action.payload,
-        }
-
-        case GET_DRIVER_DETAIL:
+      switch (action.type) {
+        case GET_DRIVERS:
           return {
             ...state,
-            driverDetail: action.payload,
+            allDrivers: action.payload,
           };
-  
+          
+          case GET_TEAMS:
+            return {
+              ...state,
+              allTeams: action.payload,
+            };
+
+          case GET_BYID:
+            return {
+              ...state,
+              driverId: action.payload,
+            }
+        
+          case GET_DRIVER_DETAIL:
+            return {
+              ...state,
+              driverDetail: {
+                ...action.payload, 
+              },
+            };
     
-      case PAGINATED:
-        return {
-          ...state,
-          currentPage:
-            action.payload === 'next'
-              ? state.currentPage + 1
-              : state.currentPage - 1,
-        };
-      case PAGE_UPDATES:
-        return {
-          ...state,
-          totalPages: action.payload,
-        };
+          case PAGINATED:
+            return {
+              ...state,
+              currentPage: action.payload === 'prev' ? state.currentPage - 1 : state.currentPage + 1,
+            };
+      
+          case PAGE_UPDATES:
+            return {
+              ...state,
+              totalPages: action.payload,
+            };
 
-        case SEARCH_BY_NAME:
-          // Actualiza el estado con los conductores encontrados por nombre.
-          return {
-            ...state,
-            searchDriver: action.payload, // Suponemos que el payload contiene los datos de los conductores encontrados.
-          };
-
-      default:
-        return state;
+          case SEARCH_BY_NAME:
+            return {
+              ...state,
+              searchDriver: action.payload, 
+            };
+            
+        default:
+          return state;
+      }
     }
-  }
-  
-    // case ORDER:
-    //   const driversOrdered =
-    //     action.payload === "Ascendente"
-    //       ? [...state.myDrivers].sort((a, b) => a.id - b.id)
-    //       : [...state.myDrivers].sort((a, b) => b.id - a.id);
-
-    //   return {
-    //     ...state,
-    //     myDrivers: driversOrdered,
-    //   };

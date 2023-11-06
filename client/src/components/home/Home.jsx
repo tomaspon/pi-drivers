@@ -24,7 +24,7 @@ const Home = () => {
     }
   };
 
-  const driversPerPage = 20;
+  const driversPerPage = 15;
   const startIndex = (currentPage - 1) * driversPerPage;
   const endIndex = startIndex + driversPerPage;
 
@@ -32,12 +32,14 @@ const Home = () => {
 
   return (
     <div>
-      <button className={style.paginatedButtons} name="prev" onClick={(e) => paginated(e, 'prev')} disabled={!PrevPage}>
-        PREV
+      <div className={style.paginatedContainer}>
+      <button className={style.prevButton} name="prev" onClick={(event) => paginated(event, 'prev')} disabled={!PrevPage}>
+        ⬅⬅PREV
       </button>
-      <button className={style.paginatedButtons} name="next" onClick={(e) => paginated(e, 'next')} disabled={!NextPage}>
-        NEXT
+      <button className={style.nextButton} name="next" onClick={(event) => paginated(event, 'next')} disabled={!NextPage}>
+        NEXT➡➡
       </button>
+      </div>
       <div className={style.cardsContainer}>
         <Cards drivers={driversToDisplay} />
       </div>

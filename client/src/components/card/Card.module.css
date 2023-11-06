@@ -3,7 +3,6 @@
     flex-wrap: wrap;
     flex-direction: row;
     position: relative;
-    top: 100px;
     margin: 18px;
     width: 280px;
     height: 450px;
@@ -48,4 +47,7 @@ p{
 
 a{
     color: black;
+}
+
+.id{
 }

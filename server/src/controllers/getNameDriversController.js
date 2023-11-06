@@ -34,7 +34,7 @@ const driverName = async (name) => {
     description: driver.description,
     image:
       driver.image.url ||
-      "https://images.squarespace-cdn.com/content/v1/5041475ac4aa99448132115f/1678818503863-3TYIXGRUMHR7XW0W43U4/IMG_2208.JPG",
+      "https://www.seekpng.com/png/detail/414-4140251_you-profile-picture-question-mark.png",
     nationality: driver.nationality,
     birthdate: driver.dob,
     teams: driver.teams,
@@ -50,6 +50,7 @@ const driverName = async (name) => {
     birthdate: driver.birthdate,
     teams: driver.Teams.map((team) => team.name),
   }));
+  console.log("ESTO VIENE DE GETNAME",{id, name});
 
   if (!apiDrivers.length && !dbDrivers.length)
     throw new Error("This driver does not exist.");

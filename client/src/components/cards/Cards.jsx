@@ -8,12 +8,13 @@ const Cards = ({ drivers }) => {
       {drivers.map(driver => (
         <Card
           key={driver.id}
+          id={driver.id}
           image={driver.image}
           name={driver.name}
           lastName={driver.lastName}
           teams={driver.teams}
         />
-      ))}
+        ))}
     </div>
   );
 };

@@ -10,6 +10,8 @@ export function getDrivers() {
         type: GET_DRIVERS,
         payload: drivers,
       });
+
+      console.log(drivers, "ESTO VIENE DEL DISPATCH GETDRIVER")
       const totalPages = Math.ceil(drivers.length / 9);
       dispatch(updateTotalPages(totalPages));
     } catch (error) {
@@ -21,18 +23,25 @@ export function getDrivers() {
 export const getDriverDetail = (id) => {
   return async function (dispatch) {
     try {
-      if (id) { // Verificar si id no es undefined o null
-        const driverDetail = await axios.get(`http://localhost:3001/drivers/${id}`);
+      const driverDetail = await axios.get(`http://localhost:3001/drivers/${id}`);
+      if (driverDetail.data) {
+        const driverData = {
+          ...driverDetail.data,
+          id: driverDetail.data.driverRef, // Usa el campo driverRef como ID
+        };
         dispatch({
           type: GET_DRIVER_DETAIL,
-          payload: driverDetail.data,
+          payload: driverData,
         });
+      } else {
+        console.error('Conductor no encontrado con ID:', id);
       }
     } catch (error) {
-      console.error('Error en la solicitud:', error);
+      console.error('Error al obtener los detalles del conductor:', error);
     }
-  }
+  };
 }
+
 
 export function getTeams() {
   return async function (dispatch) {
@@ -69,7 +78,7 @@ export function paginatedDrivers(order) {
     try {
       dispatch({
         type: PAGINATED,
-        payload: order,
+        payload: order, // El orden puede ser 'prev' o 'next'
       });
     } catch (error) {
       alert(error.response.data.error);
