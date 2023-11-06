@@ -5,14 +5,14 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName: {
+      lastname: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -22,13 +22,13 @@ module.exports = (sequelize) => {
       },
       image: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       nationality: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      birthDate: {
+      birthdate: {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },

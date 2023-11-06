@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { Driver, Teams } = require("../db");
+const { Driver, Teams } = require("../db.js");
 const { getAllDrivers } = require("../helper/driversMap");
 
 const getId = async (id, source) => {
@@ -17,6 +17,7 @@ const getId = async (id, source) => {
     }else{
         throw new Error(`Driver with ID ${id} not found`);
     }
+
 }
 
 module.exports = {

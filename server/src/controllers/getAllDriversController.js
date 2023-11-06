@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Driver, Teams } = require("../db.js");
-const {getAllDrivers}= require("../helper/driversMap.js");
+const {getAllDrivers}= require("../helper/driversMap");
 
 const getDriversDb = async () => {
   const driversDb = await Driver.findAll({ 
@@ -13,11 +13,12 @@ const getDriversDb = async () => {
       
     }
   });
+  console.log(driversDb)
   return driversDb;
 };
 
 const getDriversApi = async () => {
-    const { data } = await axios.get("http://localhost:5000/drivers");
+    const {data} = await axios.get("http://localhost:5000/drivers");
     return data;
 }
 
@@ -42,7 +43,7 @@ const getDrivers = async (name) => {
     if (driverFound.length > 0) {
       return getAllDrivers(driverFound.slice(0, 15));
     } else {
-      return { error: "No drivers with that name were found" };
+      return { error: "No se encontraron conductores con ese nombre" };
     }
   }
   return getAllDrivers(allDrivers);

@@ -1,86 +1,72 @@
-
-// const axios = require("axios");
-// const { Driver, Teams } = require("../db");
-
-// const createDriver = async (name, lastName, description, image, teams, nationality, birthDate) => {
-//   const newDriver = await Driver.create({
-//         name,
-//         lastName,
-//         description,
-//         image,
-//         nationality,
-//         birthDate
-//     })
-
-//     teams.forEach(async (teams) => {
-//         let teamsDb=await Teams.findAll({
-//             where: {
-//                 name: teams
-//             },
-//           });
-//           await newDriver.addTeams(teamsDb); 
-//         });
-
-//     const team = await Teams.findAll({
-//         where: {
-//             name: teams
-//         }
-//     })
-
-//     await newDriver.addTeams(team);
-
-//     await newDriver.reload({
-//         include: {
-//             model: Teams,
-//             attributes: ["name"],
-//             through: {
-//                 attributes: []
-//             }
-//         }
-//     });
-// }
-
-// module.exports = {
-//     createDriver
-// }
-
-const { Driver, Teams } = require("../db");
+const { Driver, Teams, } = require("../db");
 const Sequelize = require("sequelize");
-const {getAllDrivers } = require("../helper/driversMap");
 
-const postDriver = async (name, lastName, description, image, teams, nationality, birthDate) => {
-    const formattedBirthDate = new Date(birthDate).toISOString().split('T')[0];
+const createDataDriver = async (
+  name,
+  lastname,
+  description,
+  image,
+  nationality,
+  birthdate,
+  teams
+) => {
+  try {
+    // Crear un nuevo conductor en la base de datos
     const newDriver = await Driver.create({
-        name,
-        lastName,
-        description,
-        image,
-        nationality,
-        birthDate: formattedBirthDate
-    })
+      name,
+      lastname,
+      description,
+      image,
+      nationality,
+      birthdate, 
+      teams
+    });
+    // console.log("este es el driver", newDriver)
 
-    teams.forEach(async (teams) => {
-        let teamsDb=await Teams.findAll({
-            where: {
-                name: [teams]
-            },
-        });
-        
-        await newDriver.addTeams(teamsDb); 
+    // Buscar equipos cuyos nombres coincidan con los proporcionados en el parámetro 'teams'
+    const addTeams = await Teams.findAll({
+      where: {
+        name: {
+          [Sequelize.Op.in]: teams,
+        },
+      },
+    });
+    await newDriver.addTeams(addTeams);
+
+  const team = await Teams.findAll({
+      where: {
+          name: teams
+      }
+  })
+
+  await newDriver.addTeams(team);
+    // console.log("estos son los euiqpos" , teams)
+
+    // Agregar los equipos encontrados al nuevo conductor
+
+    // Realizar una consulta para obtener el conductor con los equipos asociados
+    const driverRelation = await Driver.findOne({
+      where: {
+        id: newDriver.id,
+      },
+      include: [
+        {
+          model: Teams,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
 
-    const team = await Teams.findAll({
-        where: {
-            name: teams
-        }
-    })
+    // Retornar el objeto que contiene la información del conductor y sus equipos
+    return driverRelation;
+  } catch (error) {
+    // Capturar y lanzar cualquier error que pueda ocurrir durante el proceso
+    throw error;
+  }
+  
+};
 
-    await newDriver.addTeams(team);
-
-   
-    return getAllDrivers(newDriver);
-}
-
-module.exports = {
-    postDriver
-}
+module.exports = createDataDriver;
