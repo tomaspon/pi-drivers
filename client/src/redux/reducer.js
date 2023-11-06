@@ -1,8 +1,11 @@
 import {
     GET_DRIVERS,
+    GET_DRIVER_DETAIL,
     GET_TEAMS,
+    GET_BYID,
     PAGINATED,
-    PAGE_UPDATES
+    PAGE_UPDATES,
+    SEARCH_BY_NAME,
   } from './actions-types';
 
   const initialState = {
@@ -10,6 +13,8 @@ import {
     allTeams: [],
     currentPage: 1,
     totalPages: 0, 
+    driverDetail: [],
+    searchDriver: null,
   };
   
  export const reducer = (state = initialState, action) => {
@@ -24,6 +29,20 @@ import {
           ...state,
           allTeams: action.payload,
         };
+
+      case GET_BYID:
+        return {
+          ...state,
+          driverId: action.payload,
+        }
+
+        case GET_DRIVER_DETAIL:
+          return {
+            ...state,
+            driverDetail: action.payload,
+          };
+  
+    
       case PAGINATED:
         return {
           ...state,
@@ -37,6 +56,14 @@ import {
           ...state,
           totalPages: action.payload,
         };
+
+        case SEARCH_BY_NAME:
+          // Actualiza el estado con los conductores encontrados por nombre.
+          return {
+            ...state,
+            searchDriver: action.payload, // Suponemos que el payload contiene los datos de los conductores encontrados.
+          };
+
       default:
         return state;
     }

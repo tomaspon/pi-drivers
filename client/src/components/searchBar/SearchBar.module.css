@@ -1,0 +1,46 @@
+.searchContainer{
+    display: block;
+    flex-wrap: wrap;
+    width: 400px;
+    position: relative;
+    right: -744px;
+    bottom: 64.8px;
+}
+
+.searchInput{
+    display: flex;
+    margin: 0 auto;
+    border-radius: 10px;
+    width: 300px;
+    height: 30px;
+}
+
+.searchInput::focus{
+    border:solid 1px red;
+}
+
+
+.searchButton{
+    width: 22px;
+    height: 22px;
+    position: relative;
+    left: 134px;
+    bottom: 26px;
+    border: none;
+    background:none;
+    border-radius: 40%;
+    cursor: pointer;
+}
+
+.searchButton img{
+    width: 25px;
+    position: relative;
+    right: 7px;
+    bottom: 3px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.searchButton img:hover{
+    width: 26px;
+}

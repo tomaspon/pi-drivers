@@ -15,15 +15,15 @@ body{
 .buttonStart{
     position: absolute;
     width: 136px;
-    background: none;
-    border-radius: 80px;
     height: 30px;
+    background: none;
+    border:2px solid transparent;
+    border-radius: 80px;
     color: white;         /* #EE0000 */
     display: flex;
     align-self: start;
     margin-top: 12px;
     margin-left: 0px;
-    border:2px solid transparent;
     font-size: 18px;
     font-weight: 400;
     font-family: inherit;
@@ -41,7 +41,7 @@ a{
 
 hr {
 position: relative;
-top: -10px;
+top: -12px;
 right: 720px;
 width: 20px;
 border: 0.5px solid #EE0000;
@@ -57,30 +57,30 @@ transform: rotate(90deg);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
     position: relative;
-    left: -500px;
+    left: -410px;
     margin-right: 40px;
-    top: -36px;
+    top: -36.9px;
 }
-
-/* .buttons{
-    background: none;
-    color: #EE0000;
-    border: none;
-    font-size: 20px;
-    font-weight: 600;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    cursor: pointer;
-    margin: 40px;
-    position: relative;
-    top: -59px;
-    left: -450px;
-} */
-
 
 .buttons:hover{
     color: #9c0000;
     transition: 0.3s;
 }
+
+.signButton{
+    margin: 0 auto;
+    background:none;
+    border: none;
+    color: #EE0000;
+    font-size: 17px;
+    font-weight: 600;
+    position: relative;
+    bottom: 40px;
+    left: 488px;
+    margin-right: 30px;
+    display: inline-block;
+}
+
 
 .container{
     height: 70px;
@@ -88,4 +88,6 @@ transform: rotate(90deg);
     background-color: white;
     display: block;
 }
+
+
 

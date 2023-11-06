@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { validate } from '../createForm/validation';
-import { getTeams, postDriver } from '../../redux/actions';
+import { getTeams } from '../../redux/actions';
 import style from "../createForm/CreateForm.module.css";
 
 const CreateForm = () => {
@@ -89,9 +89,10 @@ const CreateForm = () => {
           </select>
           {errors.teams && <p className={style.error}>{errors.teams}</p>}
         </div>
-
-        <button type="submit" className={style.buttons}>CREATE</button>
-      </form>
+          <button className="submit" type="submit">
+            Create driver
+          </button>
+        </form>
     </div>
   );
 };

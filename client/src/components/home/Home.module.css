@@ -1,8 +1,20 @@
-
 body {
     margin: 0;
     display: block;
     place-items: center;
     min-width: 320px;
     min-height: 100vh;
+  }
+
+  .paginatedButtons{
+    background-color: black;
+    color: red;
+    border: none;
+    padding: 4px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    position: relative;
+    display: inline-block;
+    top: 106px;
+    margin-top: -40px;
   }

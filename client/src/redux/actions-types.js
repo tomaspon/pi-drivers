@@ -1,7 +1,11 @@
 export const GET_DRIVERS = 'GET_DRIVERS'; 
+export const GET_DRIVER_DETAIL = "GET_DRIVER_DETAIL";
+export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
+export const SORT_DRIVERS_BY_NAME = "SORT_DRIVERS_BY_NAME";
+export const SORT_DRIVERS_BY_DATE = "SORT_DRIVERS_BY_DATE";
 export const GET_TEAMS = 'GET_TEAMS';
-export const POST_DRIV = 'POST_DRIV';
-export const PAGINATED = 'PAGINATED'
+export const GET_BYID = 'GET_BYID'
 export const PAGE_UPDATES = 'PAGE_UPDATES'
+export const PAGINATED = 'PAGINATED'
 export const FILTER_DRIVERS = "FILTER_DRIVERS";
 export const ORDER_DRIVERS = "ORDER_DRIVERS";
