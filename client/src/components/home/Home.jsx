@@ -24,7 +24,7 @@ const Home = () => {
     }
   };
 
-  const driversPerPage = 15;
+  const driversPerPage = 9;
   const startIndex = (currentPage - 1) * driversPerPage;
   const endIndex = startIndex + driversPerPage;
 

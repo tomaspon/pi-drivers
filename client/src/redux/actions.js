@@ -10,8 +10,6 @@ export function getDrivers() {
         type: GET_DRIVERS,
         payload: drivers,
       });
-
-      console.log(drivers, "ESTO VIENE DEL DISPATCH GETDRIVER")
       const totalPages = Math.ceil(drivers.length / 9);
       dispatch(updateTotalPages(totalPages));
     } catch (error) {
@@ -27,7 +25,6 @@ export const getDriverDetail = (id) => {
       if (driverDetail.data) {
         const driverData = {
           ...driverDetail.data,
-          id: driverDetail.data.driverRef, // Usa el campo driverRef como ID
         };
         dispatch({
           type: GET_DRIVER_DETAIL,

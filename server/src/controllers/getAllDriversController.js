@@ -13,8 +13,7 @@ const getDriversDb = async () => {
       
     }
   });
-  console.log(driversDb)
-  return driversDb;
+    return driversDb;
 };
 
 const getDriversApi = async () => {

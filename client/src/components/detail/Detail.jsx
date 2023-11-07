@@ -7,7 +7,6 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const driverDetail = useSelector((state) => state.driverDetail);
-
   useEffect(() => {
     dispatch(getDriverDetail(id));
   }, [dispatch, id]);
@@ -21,6 +20,7 @@ const Detail = () => {
               <img src={driverDetail.image} alt="" />
           </div>
           <div>
+            <h2>{id}</h2>
             <p>Name: {driverDetail.name} {driverDetail.lastname}</p>
             <p>Nationality: {driverDetail.nationality}</p>
             <p>Birthdate: {driverDetail.birthDate}</p>
