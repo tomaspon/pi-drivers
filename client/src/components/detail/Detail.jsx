@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getDriverDetail } from '../../redux/actions';
+import style from "./Detail.module.css"
+
 
 const Detail = () => {
   const { id } = useParams();
@@ -12,22 +14,26 @@ const Detail = () => {
   }, [dispatch, id]);
 
   return (
-      <div>
+    <div>
+      <h2 className={style.details}>DETAILS</h2>
+      <div className={style.detailContainer}>
           <div>
-              <p>DETAILS</p>
-          </div>
+            <div className={style.imgContainer}>
+            <img className={style.image} src={driverDetail.image} alt="" />
+            <h2 className={style.id}>{id}</h2>
+            <h2 className={style.drivDetails}>Nationality: {driverDetail.nationality}</h2>
+            <h2 className={style.drivDetails}>Birthdate: {driverDetail.birthDate}</h2>
+            <h3 className={style.drivDetails}>Teams: {driverDetail.teams ? driverDetail.teams.join(", ") : ""}</h3>
+            </div>
+            </div>  
           <div>
-              <img src={driverDetail.image} alt="" />
+            <h2 className={style.drivNames}>{driverDetail.name} {driverDetail.lastName}</h2>
+            <div>
+            <h2 className={style.drivDescriptTitle}>Description</h2>
+            <p className={style.drivDescript}>{driverDetail.description}</p>
+            </div>
           </div>
-          <div>
-            <h2>{id}</h2>
-            <p>Name: {driverDetail.name} {driverDetail.lastname}</p>
-            <p>Nationality: {driverDetail.nationality}</p>
-            <p>Birthdate: {driverDetail.birthDate}</p>
-            {Array.isArray(driverDetail.Teams)
-            ? driverDetail.Teams.map((team) => team.name).join(", ")                : driverDetail.teams}
-            <p>Description: {driverDetail.description}</p>
-          </div>
+      </div>
       </div>
     );
 };
