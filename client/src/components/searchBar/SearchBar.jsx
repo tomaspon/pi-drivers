@@ -13,13 +13,11 @@ const SearchBar = ()=>{
   };
 
   const handleSearch = () => {
-    // Despachamos la acción para buscar conductores por nombre.
     dispatch(searchDriver(name));
   };
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      // Si se presiona la tecla "Enter", realizamos la búsqueda.
       handleSearch();
     }
   };

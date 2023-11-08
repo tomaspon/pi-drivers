@@ -1,8 +1,5 @@
-import { GET_DRIVERS, GET_BYID, GET_DRIVER_DETAIL, GET_TEAMS, PAGE_UPDATES, PAGINATED, SEARCH_BY_NAME, FILTER_APIDB } from './actions-types'
+import { GET_DRIVERS, GET_BYID, GET_DRIVER_DETAIL, GET_TEAMS, PAGE_UPDATES, PAGINATED, SEARCH_BY_NAME, FILTER_APIDB } from '../actions-types/actions-types'
 import axios, { all } from 'axios'
-
-// , ORDER_ASC_DESC,
-//   ORDER_BY_DOB
 
 export function getDrivers() {
   return async function (dispatch) {
@@ -45,18 +42,10 @@ export const getDriverDetail = (id) => {
 export const filterApiDb = () => {
   return async (dispatch) => {
     try {
-      // Realiza una solicitud a localhost:3001/drivers para obtener todos los conductores
       const response = await axios.get('http://localhost:3001/drivers');
       const allDrivers = response.data;
-      console.log(allDrivers, "ESTO VIENE DEL ACTION ALLDRIVERS")
-
-      // Filtra los conductores de la API y de la base de datos
-      const apiDrivers = allDrivers.filter((driver) => (!driver.isFromDb)); // Conductores de la API
+      const apiDrivers = allDrivers.filter((driver) => (!driver.isFromDb));
       const dbDrivers = allDrivers.filter((driver) => driver.isFromDb == true);
-   // Conductores de la base de datos
-      console.log(dbDrivers, "ESTO VIENE DEL ACTION FILTERAPI dbDrivers")
-      console.log(apiDrivers, "ESTO VIENE DEL ACTION FILTERAPI apiDrivers")
-
       dispatch({
         type: FILTER_APIDB,
         payload: {
@@ -74,11 +63,9 @@ export const filterApiDb = () => {
       return async (dispatch) => {
         try {
           const response = await axios.post('http://localhost:3001/drivers', driverData);
-          // Si la solicitud es exitosa, puedes manejarla aquí
-          dispatch(driverPostedSuccess(response.data)); // Esto dependerá de cómo quieras manejar la respuesta exitosa
+          dispatch(driverPostedSuccess(response.data)); 
         } catch (error) {
-          // Si hay un error en la solicitud, puedes manejarlo aquí
-          dispatch(driverPostedError(error.message)); // Esto dependerá de cómo quieras manejar el error
+          dispatch(driverPostedError(error.message));
         }
       };
     }
@@ -87,15 +74,12 @@ export const filterApiDb = () => {
 export const searchDriver = (name) => {
   return async function (dispatch) {
     try {
-      // Realiza una solicitud HTTP a la URL con el nombre como parámetro.
       const response = await axios.get(`http://localhost:3001/drivers?name=${name}`);
-      // Despacha una acción con los datos de la respuesta.
       dispatch({
         type: SEARCH_BY_NAME,
-        payload: response.data, // Suponemos que la respuesta contiene los datos de los conductores encontrados.
+        payload: response.data, 
       });
     } catch (error) {
-      // Maneja errores si la solicitud falla.
       console.error('Error al buscar conductores por nombre:', error);
     }
   };
@@ -137,7 +121,7 @@ export function paginatedDrivers(order) {
     try {
       dispatch({
         type: PAGINATED,
-        payload: order, // El orden puede ser 'prev' o 'next'
+        payload: order,
       });
     } catch (error) {
       alert(error.response.data.error);

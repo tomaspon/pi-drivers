@@ -11,7 +11,6 @@ const createDataDriver = async (
   teams,
 ) => {
   try {
-    // Crear un nuevo conductor en la base de datos
     const newDriver = await Driver.create({
       name,
       lastname,
@@ -21,9 +20,7 @@ const createDataDriver = async (
       birthdate, 
       teams,
     });
-    console.log("este es el driver", newDriver)
 
-    // Buscar equipos cuyos nombres coincidan con los proporcionados en el parámetro 'teams'
     const addTeams = await Teams.findAll({
       where: {
         name: {
@@ -40,11 +37,7 @@ const createDataDriver = async (
   })
 
   await newDriver.addTeams(team);
-    // console.log("estos son los euiqpos" , teams)
 
-    // Agregar los equipos encontrados al nuevo conductor
-
-    // Realizar una consulta para obtener el conductor con los equipos asociados
     const driverRelation = await Driver.findOne({
       where: {
         id: newDriver.id,
@@ -59,14 +52,10 @@ const createDataDriver = async (
         },
       ],
     });
-
-    // Retornar el objeto que contiene la información del conductor y sus equipos
     return driverRelation;
   } catch (error) {
-    // Capturar y lanzar cualquier error que pueda ocurrir durante el proceso
-    throw error;
+    throw Error(error.message)
   }
-  
 };
 
 module.exports = createDataDriver;

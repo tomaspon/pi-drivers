@@ -1,7 +1,6 @@
 export const validate = (values, clearErrors) => {
   const errors = {};
 
-  // Validaciones para 'name'
   if (!values.name) {
     errors.name = "Name is required.";
   } else if (values.name.length < 3 || values.name.length > 20) {
@@ -12,7 +11,6 @@ export const validate = (values, clearErrors) => {
     errors.name = "✔✔";
   }
 
-  // Validaciones para 'lastName'
   if (!values.lastName) {
     errors.lastName = "Last name is required.";
   } else if (values.lastName.length > 20) {
@@ -23,7 +21,6 @@ export const validate = (values, clearErrors) => {
     errors.lastName = "✔✔";
   }
 
-  // Validaciones para 'description'
   if (!values.description) {
     errors.description = "Description is required.";
   } else if (values.description.length > 2000) {
@@ -32,7 +29,6 @@ export const validate = (values, clearErrors) => {
     errors.description = "✔✔";
   }
 
-  // Validaciones para 'image' (si se proporciona)
   if (!values.image) {
     errors.image = "Image URL is required.";
   } else if (!isUrlValid(values.image)) {
@@ -41,21 +37,18 @@ export const validate = (values, clearErrors) => {
     errors.image = "✔✔";
   }
 
-  // Validaciones para 'nationality'
   if (!values.nationality) {
     errors.nationality = "Nationality is required.";
   } else {
     errors.nationality = "✔✔";
   }
 
-  // Validaciones para 'birthDate'
   if (!values.birthDate) {
     errors.birthDate = "Birth date is required.";
   } else {
     errors.birthDate = "✔✔";
   }
 
-  // Validaciones para 'teams'
   if (!values.teams || values.teams.length === 0) {
     errors.teams = "The team is required.";
   } else {

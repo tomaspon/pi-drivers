@@ -37,13 +37,6 @@ const postNewDriver = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-  console.log("ESTE ES EL DRIVERRRRRRRRRRRR",{      name,
-    lastname,
-    description,
-    image,
-    nationality,
-    birthdate, 
-    teams  })
 };
 
 module.exports = postNewDriver;

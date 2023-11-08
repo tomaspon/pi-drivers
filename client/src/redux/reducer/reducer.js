@@ -9,7 +9,7 @@ import {
     DRIVER_POSTED_ERROR,
     DRIVER_POSTED_SUCCESS,
     FILTER_APIDB
-  } from './actions-types';
+  } from '../actions-types/actions-types';
 
   const initialState = {
     allDrivers: [],
@@ -19,7 +19,7 @@ import {
     driverDetail: [],
     driversCopy: [],
     apiDrivers: [],
-    dbDrivers: [],  // Conductores de la base de datos con createDb: true
+    dbDrivers: [], 
     driversFiltered: [],
     searchDriver: null,
     drivers: [],
@@ -56,8 +56,6 @@ import {
               },
             };
 
-
-
             case DRIVER_POSTED_SUCCESS:
               return {
                 ...state,
@@ -88,7 +86,6 @@ import {
                 apiDrivers: action.payload.apiDrivers,
                 dbDrivers: action.payload.dbDrivers,
               };
-            // Otros casos de acción...
 
 
           case SEARCH_BY_NAME:

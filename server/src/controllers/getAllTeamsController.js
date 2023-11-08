@@ -35,12 +35,12 @@ const getAllTeams = async () => {
           });
 
           if (created) {
-            console.log(`Equipo creado: ${team}`);
+            throw new Error(`Equipo creado: ${team}`);
           } else {
-            console.log(`Equipo ya existente: ${team}`);
+            throw new Error(`Equipo ya existente: ${team}`);
           }
         } catch (error) {
-          console.error(`Error al crear el equipo ${team}:`, error);
+          throw new Error(`Error al crear el equipo ${team}:`, error);
         }
       })
     );

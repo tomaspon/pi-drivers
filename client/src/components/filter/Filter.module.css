@@ -23,11 +23,12 @@
       display: block;
       flex-wrap: wrap;
       flex-direction: row;
+      height: 60px;
     }
     
-.filterInput select{
-    cursor: pointer;
-    position: relative;
+    .filterInput select{
+        cursor: pointer;
+        position: relative;
     top: 134px;
     left: 10px;
     margin: 0 auto;
