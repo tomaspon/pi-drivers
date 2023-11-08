@@ -43,7 +43,7 @@ const postNewDriver = async (req, res) => {
     image,
     nationality,
     birthdate, 
-    teams})
+    teams  })
 };
 
 module.exports = postNewDriver;

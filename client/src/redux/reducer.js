@@ -6,6 +6,9 @@ import {
     PAGINATED,
     PAGE_UPDATES,
     SEARCH_BY_NAME,
+    DRIVER_POSTED_ERROR,
+    DRIVER_POSTED_SUCCESS,
+    FILTER_APIDB
   } from './actions-types';
 
   const initialState = {
@@ -14,15 +17,23 @@ import {
     currentPage: 1,
     totalPages: 0, 
     driverDetail: [],
+    driversCopy: [],
+    apiDrivers: [],
+    dbDrivers: [],  // Conductores de la base de datos con createDb: true
+    driversFiltered: [],
     searchDriver: null,
+    drivers: [],
+    error: null,
   };
   
  export const reducer = (state = initialState, action) => {
+
       switch (action.type) {
         case GET_DRIVERS:
           return {
             ...state,
-            allDrivers: action.payload,
+            allDrivers: [...action.payload],
+            driversCopy: action.payload,
           };
           
           case GET_TEAMS:
@@ -36,7 +47,7 @@ import {
               ...state,
               driverId: action.payload,
             }
-        
+
           case GET_DRIVER_DETAIL:
             return {
               ...state,
@@ -44,7 +55,21 @@ import {
                 ...action.payload, 
               },
             };
-    
+
+
+
+            case DRIVER_POSTED_SUCCESS:
+              return {
+                ...state,
+                drivers: [...state.drivers, action.payload],
+                error: null, 
+              };
+            case DRIVER_POSTED_ERROR:
+              return {
+                ...state,
+                error: action.payload,
+              };
+
           case PAGINATED:
             return {
               ...state,
@@ -56,6 +81,15 @@ import {
               ...state,
               totalPages: action.payload,
             };
+
+            case FILTER_APIDB:
+              return {
+                ...state,
+                apiDrivers: action.payload.apiDrivers,
+                dbDrivers: action.payload.dbDrivers,
+              };
+            // Otros casos de acción...
+
 
           case SEARCH_BY_NAME:
             return {

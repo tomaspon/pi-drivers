@@ -18,7 +18,15 @@ const CreateForm = () => {
     teams: []
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    name: "",
+    lastName: "",
+    description: "",
+    image: "",
+    nationality: "",
+    birthDate: "",
+    teams: []
+  });
 
   useEffect(() => {
     dispatch(getTeams());

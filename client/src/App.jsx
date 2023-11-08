@@ -8,7 +8,7 @@ import Home from '../src/components/home/Home';
 import Landing from '../src/components/landing/Landing';
 import Detail from '../src/components/detail/Detail';
 import NavBar from './components/navBar/NavBar';
-import CreateForm from './components/createForm/CreateForm';
+import Form from './components/createForm/CreateForm';
 
 // styles
 import './App.css'
@@ -23,7 +23,7 @@ const App = () => {
         <Route exact path="/home" element={<Home/>} />
         <Route path="/" element={<Landing/>} />
         <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/create" element={<CreateForm/>} />
+        <Route path="/create" element={<Form/>} />
       </Routes>
       </div>
     </>

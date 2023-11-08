@@ -10,14 +10,12 @@ const getId = async (id, source) => {
     } else {
         driver = await Driver.findByPk(id, { include: [Teams] });
     }
-
     if (driver) {
         const drivers = getAllDrivers([driver])
         return drivers[0];
     }else{
         throw new Error(`Driver with ID ${id} not found`);
     }
-
 }
 
 module.exports = {

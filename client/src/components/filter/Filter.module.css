@@ -1,0 +1,97 @@
+
+  .driversList{
+    display: block;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    bottom: 19px;
+    position: relative;
+    flex-direction: column;
+    width: 1890px;
+    left: -4px;
+}
+
+.driverCards{
+    width: 400px;
+    display: block;
+    flex-wrap: wrap;
+    position: relative;
+    flex-direction: row;
+}
+
+
+.filterContainer{
+      display: block;
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+    
+.filterInput select{
+    cursor: pointer;
+    position: relative;
+    top: 134px;
+    left: 10px;
+    margin: 0 auto;
+    z-index: 3;
+    border: 1px solid red;
+    display: inline-block;
+}
+
+.filterInput p{
+    color: white;
+}
+    
+.filterInput span{
+    color: black;
+    position: relative;
+    top: 84px;
+    display: flex;
+}
+    
+.filterInput label{
+    color: white;
+}
+
+.cardsContainer{
+    justify-content: center;
+    align-items: center;
+    display: block;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.nextButton{
+    background-color: white;
+    color: red;
+    border-radius: 6px;
+    border: solid 1px  red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 1350px;
+    position: absolute;
+    right: 175px;
+    bottom: 720px;
+  }
+  
+  .prevButton{
+    background-color: white;
+    color: red;
+    border-radius: 6px;
+    border: solid 1px  red;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    position: absolute;
+    left: 168px;
+    bottom: 720px;
+}
+
+  .titleDrivers{
+    color: red;
+    position: relative;
+    display: block;
+    top: 96px;
+    left: 360px;
+  }

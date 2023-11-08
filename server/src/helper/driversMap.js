@@ -28,7 +28,6 @@ function getAllDrivers(drivers) {
 
         const name = driver.name.forename || driver.name;
         const lastName = driver.name.surname || driver.lastName;
-
         return {
           id: driver.id,
           name: name,
@@ -39,7 +38,6 @@ function getAllDrivers(drivers) {
           nationality: driver.nationality,
           birthDate: driver.dob || driver.birthDate,
           isFromDb: isFromDb,
-
         };
       } else {
         return null;

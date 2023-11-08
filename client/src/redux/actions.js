@@ -1,5 +1,8 @@
-import { GET_DRIVERS, GET_BYID, GET_DRIVER_DETAIL, GET_TEAMS, PAGE_UPDATES, PAGINATED, SORT_DRIVERS_BY_DATE, SORT_DRIVERS_BY_NAME, SEARCH_BY_NAME } from './actions-types'
-import axios from 'axios'
+import { GET_DRIVERS, GET_BYID, GET_DRIVER_DETAIL, GET_TEAMS, PAGE_UPDATES, PAGINATED, SEARCH_BY_NAME, FILTER_APIDB } from './actions-types'
+import axios, { all } from 'axios'
+
+// , ORDER_ASC_DESC,
+//   ORDER_BY_DOB
 
 export function getDrivers() {
   return async function (dispatch) {
@@ -39,6 +42,64 @@ export const getDriverDetail = (id) => {
   };
 }
 
+export const filterApiDb = () => {
+  return async (dispatch) => {
+    try {
+      // Realiza una solicitud a localhost:3001/drivers para obtener todos los conductores
+      const response = await axios.get('http://localhost:3001/drivers');
+      const allDrivers = response.data;
+      console.log(allDrivers, "ESTO VIENE DEL ACTION ALLDRIVERS")
+
+      // Filtra los conductores de la API y de la base de datos
+      const apiDrivers = allDrivers.filter((driver) => (!driver.isFromDb)); // Conductores de la API
+      const dbDrivers = allDrivers.filter((driver) => driver.isFromDb == true);
+   // Conductores de la base de datos
+      console.log(dbDrivers, "ESTO VIENE DEL ACTION FILTERAPI dbDrivers")
+      console.log(apiDrivers, "ESTO VIENE DEL ACTION FILTERAPI apiDrivers")
+
+      dispatch({
+        type: FILTER_APIDB,
+        payload: {
+          apiDrivers: apiDrivers,
+          dbDrivers: dbDrivers,
+        },
+      });
+    } catch (error) {
+      console.error('Error al obtener los filtros:', error);
+    }
+  };
+};
+
+    export function postDriver(driverData) {
+      return async (dispatch) => {
+        try {
+          const response = await axios.post('http://localhost:3001/drivers', driverData);
+          // Si la solicitud es exitosa, puedes manejarla aquí
+          dispatch(driverPostedSuccess(response.data)); // Esto dependerá de cómo quieras manejar la respuesta exitosa
+        } catch (error) {
+          // Si hay un error en la solicitud, puedes manejarlo aquí
+          dispatch(driverPostedError(error.message)); // Esto dependerá de cómo quieras manejar el error
+        }
+      };
+    }
+
+
+export const searchDriver = (name) => {
+  return async function (dispatch) {
+    try {
+      // Realiza una solicitud HTTP a la URL con el nombre como parámetro.
+      const response = await axios.get(`http://localhost:3001/drivers?name=${name}`);
+      // Despacha una acción con los datos de la respuesta.
+      dispatch({
+        type: SEARCH_BY_NAME,
+        payload: response.data, // Suponemos que la respuesta contiene los datos de los conductores encontrados.
+      });
+    } catch (error) {
+      // Maneja errores si la solicitud falla.
+      console.error('Error al buscar conductores por nombre:', error);
+    }
+  };
+};
 
 export function getTeams() {
   return async function (dispatch) {
@@ -54,6 +115,7 @@ export function getTeams() {
     }
   }
 }
+
 
 export function getByID(id) {
   return async function (dispatch) {
@@ -89,37 +151,3 @@ export function updateTotalPages(totalPages) {
     payload: totalPages,
   };
 }
-
-export const orderDrivers = (payload) => {
-  return {
-    type: ORDER_ASC_DESC,
-    payload,
-  };
-};
-
-export const searchDriver = (name) => {
-  return async function (dispatch) {
-    try {
-      // Realiza una solicitud HTTP a la URL con el nombre como parámetro.
-      const response = await axios.get(`http://localhost:3001/drivers?name=${name}`);
-      console.log(response)
-      // Despacha una acción con los datos de la respuesta.
-      dispatch({
-        type: SEARCH_BY_NAME,
-        payload: response.data, // Suponemos que la respuesta contiene los datos de los conductores encontrados.
-      });
-    } catch (error) {
-      // Maneja errores si la solicitud falla.
-      console.error('Error al buscar conductores por nombre:', error);
-    }
-  };
-};
-export const sortDriversByName = (order) => {
-  return { type: SORT_DRIVERS_BY_NAME, payload: order };
-};
-
-export const sortDriversByDate = (order) => {
-  return { type: SORT_DRIVERS_BY_DATE, payload: order };
-};
-
-

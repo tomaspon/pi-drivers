@@ -8,7 +8,7 @@ const createDataDriver = async (
   image,
   nationality,
   birthdate,
-  teams
+  teams,
 ) => {
   try {
     // Crear un nuevo conductor en la base de datos
@@ -19,9 +19,9 @@ const createDataDriver = async (
       image,
       nationality,
       birthdate, 
-      teams
+      teams,
     });
-    // console.log("este es el driver", newDriver)
+    console.log("este es el driver", newDriver)
 
     // Buscar equipos cuyos nombres coincidan con los proporcionados en el parámetro 'teams'
     const addTeams = await Teams.findAll({
